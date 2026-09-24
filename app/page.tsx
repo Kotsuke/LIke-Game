@@ -48,42 +48,20 @@ const previews: Record<string, PreviewData> = {
 
 export default function Home() {
   const [hovered, setHovered] = useState<string | null>(null);
-  const preview = hovered ? previews[hovered] : null;
+  const activeKey = hovered || "about";
+  const preview = previews[activeKey];
 
   return (
     <div className="p5-home-container">
-      <Sidebar onHover={setHovered} />
+      <Sidebar onHover={setHovered} activeKey={activeKey} />
 
       <div className="p5-preview-area p5-halftone p5-slash-bg">
         {/* Decorative diagonal stripes */}
         <div className="p5-preview-decor" />
 
-        {/* Default state — when nothing is hovered */}
-        {!preview && (
-          <div className="p5-preview-content" key="default">
-            <div className="p5-preview-icon">
-              <span>⌂</span>
-            </div>
-            <p className="p5-preview-label">// Welcome</p>
-            <h1 className="p5-preview-title">
-              Creative <span className="highlight">Portfolio</span>
-            </h1>
-            <p className="p5-preview-desc">
-              Hover over the menu items to preview each section, then click to
-              explore the full content. Built with bold design and clean code.
-            </p>
-            <div className="p5-preview-hint">
-              <div className="arrow">
-                <span>←</span>
-              </div>
-              <span>Hover the menu to explore</span>
-            </div>
-          </div>
-        )}
-
-        {/* Dynamic preview — changes based on hovered nav item */}
+        {/* Dynamic preview — changes based on hovered nav item or defaults to About */}
         {preview && (
-          <div className="p5-preview-content" key={hovered}>
+          <div className="p5-preview-content" key={activeKey}>
             <div className="p5-preview-icon">
               <span>{preview.icon}</span>
             </div>

@@ -19,9 +19,10 @@ export const navItems: NavItem[] = [
 
 interface SidebarProps {
   onHover?: (key: string | null) => void;
+  activeKey?: string;
 }
 
-export default function Sidebar({ onHover }: SidebarProps) {
+export default function Sidebar({ onHover, activeKey }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -35,12 +36,8 @@ export default function Sidebar({ onHover }: SidebarProps) {
     onHover?.(key);
   };
 
-  const handleMouseLeave = () => {
-    onHover?.(null);
-  };
-
   const isActive = (item: NavItem) => {
-    return pathname === item.href;
+    return pathname === item.href || activeKey === item.key;
   };
 
   return (
@@ -79,7 +76,6 @@ export default function Sidebar({ onHover }: SidebarProps) {
                 className={`p5-nav-link ${isActive(item) ? "active" : ""}`}
                 onClick={() => handleClick(item)}
                 onMouseEnter={() => handleMouseEnter(item.key)}
-                onMouseLeave={handleMouseLeave}
                 id={`nav-${item.key}`}
               >
                 <span className="nav-icon">{item.icon}</span>
