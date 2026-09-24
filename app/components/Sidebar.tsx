@@ -90,10 +90,6 @@ export default function Sidebar({ onHover }: SidebarProps) {
             </li>
           ))}
         </ul>
-
-        <div className="p5-sidebar-footer">
-          <p>© 2026</p>
-        </div>
       </aside>
     </>
   );

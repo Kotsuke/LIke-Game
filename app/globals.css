@@ -90,27 +90,41 @@ body {
   left: -10%;
   width: 120%;
   height: 200%;
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 40px,
-    rgba(230, 0, 18, 0.04) 40px,
-    rgba(230, 0, 18, 0.04) 42px
-  );
+  background: repeating-linear-gradient(110deg,
+      transparent,
+      transparent 40px,
+      rgba(230, 0, 18, 0.04) 40px,
+      rgba(230, 0, 18, 0.04) 42px);
   pointer-events: none;
   z-index: 0;
 }
 
 /* ==========================================
-   FIXED HOME LAYOUT
+   FIXED HOME LAYOUT — 110° diagonal split
    ========================================== */
 
 .p5-home-container {
-  display: flex;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   position: relative;
+}
+
+/* Glowing diagonal seam line (20° from vertical, upper-left to lower-right) */
+.p5-home-container::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px;
+  height: 115vh;
+  background: var(--p5-red);
+  transform: translate(-50%, -50%) rotate(20deg);
+  z-index: 50;
+  pointer-events: none;
+  box-shadow:
+    0 0 12px var(--p5-red-glow),
+    0 0 30px var(--p5-red-glow);
 }
 
 /* ==========================================
@@ -127,6 +141,52 @@ body {
   flex-direction: column;
   z-index: 100;
   position: relative;
+  padding-top: 25vh;
+}
+
+/* Override sidebar when inside the home diagonal layout */
+.p5-home-container .p5-sidebar {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  clip-path: polygon(
+    0 0,
+    calc(50% + 18.2vh) 0,
+    calc(50% - 18.2vh) 100%,
+    0 100%
+  );
+
+  padding-left: 12vw;
+  padding-right: 50%;
+
+  z-index: 10;
+
+  background: linear-gradient(
+    110deg,
+    #151210 0%,
+    #1c1714 40%,
+    #231d18 70%,
+    #2a221c 100%
+  );
+}
+
+/* Staircase nav items — reversed, top item nearest diagonal, stepping left going down */
+.p5-home-container .p5-nav-item:nth-child(1) {
+  margin-left: 80%;
+}
+
+.p5-home-container .p5-nav-item:nth-child(2) {
+  margin-left: 75%;
+}
+
+.p5-home-container .p5-nav-item:nth-child(3) {
+  margin-left: 75%;
+}
+
+.p5-home-container .p5-nav-item:nth-child(4) {
+  margin-left: 70%;
 }
 
 .p5-sidebar-logo {
@@ -236,7 +296,7 @@ body {
 }
 
 /* ==========================================
-   PREVIEW AREA (Home Page)
+   PREVIEW AREA (Home Page) — right diagonal half
    ========================================== */
 
 .p5-preview-area {
@@ -247,6 +307,33 @@ body {
   justify-content: center;
   position: relative;
   overflow: hidden;
+}
+
+/* Override preview area when inside the home diagonal layout */
+.p5-home-container .p5-preview-area {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  clip-path: polygon(
+    calc(50% + 18.2vh) 0,
+    100% 0,
+    100% 100%,
+    calc(50% - 18.2vh) 100%
+  );
+
+  padding-left: 50%;
+
+  z-index: 9;
+
+  background: linear-gradient(
+    290deg,
+    #0d0e18 0%,
+    #0a0c16 40%,
+    #080b1a 70%,
+    #0c1020 100%
+  );
 }
 
 .p5-preview-content {
@@ -379,9 +466,9 @@ body {
   right: -20%;
   width: 140%;
   height: 140%;
-  background: linear-gradient(135deg, transparent 40%, rgba(230, 0, 18, 0.05) 40%, rgba(230, 0, 18, 0.05) 42%, transparent 42%),
-    linear-gradient(135deg, transparent 50%, rgba(230, 0, 18, 0.03) 50%, rgba(230, 0, 18, 0.03) 52%, transparent 52%),
-    linear-gradient(135deg, transparent 60%, rgba(230, 0, 18, 0.02) 60%, rgba(230, 0, 18, 0.02) 62%, transparent 62%);
+  background: linear-gradient(110deg, transparent 40%, rgba(230, 0, 18, 0.05) 40%, rgba(230, 0, 18, 0.05) 42%, transparent 42%),
+    linear-gradient(110deg, transparent 50%, rgba(230, 0, 18, 0.03) 50%, rgba(230, 0, 18, 0.03) 52%, transparent 52%),
+    linear-gradient(110deg, transparent 60%, rgba(230, 0, 18, 0.02) 60%, rgba(230, 0, 18, 0.02) 62%, transparent 62%);
   animation: p5-diagonal-drift 8s ease-in-out infinite alternate;
 }
 
@@ -649,13 +736,11 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 10px,
-    rgba(230, 0, 18, 0.05) 10px,
-    rgba(230, 0, 18, 0.05) 12px
-  );
+  background: repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 10px,
+      rgba(230, 0, 18, 0.05) 10px,
+      rgba(230, 0, 18, 0.05) 12px);
 }
 
 .p5-project-number {
@@ -951,6 +1036,7 @@ body {
     transform: translateX(-40px);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -962,6 +1048,7 @@ body {
     transform: translateY(40px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -969,8 +1056,15 @@ body {
 }
 
 @keyframes p5-fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes p5-preview-enter {
@@ -978,6 +1072,7 @@ body {
     opacity: 0;
     transform: translateX(30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -989,6 +1084,7 @@ body {
     opacity: 0;
     transform: skewX(-8deg) scale(0.5);
   }
+
   to {
     opacity: 1;
     transform: skewX(-8deg) scale(1);
@@ -996,23 +1092,47 @@ body {
 }
 
 @keyframes p5-diagonal-drift {
-  0% { transform: translateX(0) translateY(0); }
-  100% { transform: translateX(-30px) translateY(20px); }
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+
+  100% {
+    transform: translateX(-30px) translateY(20px);
+  }
 }
 
 @keyframes p5-star-spin {
-  from { transform: skewX(5deg) rotate(0deg); }
-  to { transform: skewX(5deg) rotate(360deg); }
+  from {
+    transform: skewX(5deg) rotate(0deg);
+  }
+
+  to {
+    transform: skewX(5deg) rotate(360deg);
+  }
 }
 
 @keyframes p5-bar-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
 }
 
 @keyframes p5-arrow-pulse {
-  0%, 100% { transform: skewX(-5deg) translateX(0); }
-  50% { transform: skewX(-5deg) translateX(6px); }
+
+  0%,
+  100% {
+    transform: skewX(-5deg) translateX(0);
+  }
+
+  50% {
+    transform: skewX(-5deg) translateX(6px);
+  }
 }
 
 @keyframes p5-page-slide-in {
@@ -1020,6 +1140,7 @@ body {
     opacity: 0;
     transform: translateX(60px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -1031,6 +1152,7 @@ body {
     opacity: 0;
     transform: skewX(-5deg) translateX(-30px);
   }
+
   to {
     opacity: 1;
     transform: skewX(-5deg) translateX(0);
@@ -1059,6 +1181,35 @@ body {
 
   .p5-hamburger {
     display: flex;
+  }
+
+  /* Disable diagonal split on mobile — revert to hamburger sidebar */
+  .p5-home-container::after {
+    display: none;
+  }
+
+  .p5-home-container .p5-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    clip-path: none;
+    padding-right: 0;
+    border-right: 3px solid var(--p5-red);
+    transform: translateX(-100%);
+    z-index: 150;
+  }
+
+  .p5-home-container .p5-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .p5-home-container .p5-preview-area {
+    position: relative;
+    clip-path: none;
+    padding-left: 0;
+    width: 100%;
   }
 
   .p5-sidebar {
