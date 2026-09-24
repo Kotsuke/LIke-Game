@@ -70,7 +70,6 @@ export default function Sidebar({ onHover }: SidebarProps) {
           onClick={() => { router.push("/"); setIsOpen(false); }}
           style={{ cursor: "pointer", border: "none", background: "none", textAlign: "left", width: "100%", color: "var(--p5-white)", fontFamily: "inherit" }}
         >
-          Port<span className="accent">folio</span>
         </button>
 
         <ul className="p5-nav-list">

@@ -151,30 +151,25 @@ body {
   width: 100%;
   height: 100%;
 
-  clip-path: polygon(
-    0 0,
-    calc(50% + 18.2vh) 0,
-    calc(50% - 18.2vh) 100%,
-    0 100%
-  );
+  clip-path: polygon(0 0,
+      calc(50% + 18.2vh) 0,
+      calc(50% - 18.2vh) 100%,
+      0 100%);
 
   padding-left: 12vw;
   padding-right: 50%;
-
   z-index: 10;
 
-  background: linear-gradient(
-    110deg,
-    #151210 0%,
-    #1c1714 40%,
-    #231d18 70%,
-    #2a221c 100%
-  );
+  background: linear-gradient(110deg,
+      #151210 0%,
+      #1c1714 40%,
+      #231d18 70%,
+      #2a221c 100%);
 }
 
 /* Staircase nav items — reversed, top item nearest diagonal, stepping left going down */
 .p5-home-container .p5-nav-item:nth-child(1) {
-  margin-left: 80%;
+  margin-left: 83%;
 }
 
 .p5-home-container .p5-nav-item:nth-child(2) {
@@ -182,7 +177,7 @@ body {
 }
 
 .p5-home-container .p5-nav-item:nth-child(3) {
-  margin-left: 75%;
+  margin-left: 77%;
 }
 
 .p5-home-container .p5-nav-item:nth-child(4) {
@@ -235,7 +230,8 @@ body {
   cursor: pointer;
   border: none;
   background: none;
-  width: 100%;
+  width: max-content;
+  white-space: nowrap;
   font-family: inherit;
 }
 
@@ -316,24 +312,20 @@ body {
   width: 100%;
   height: 100%;
 
-  clip-path: polygon(
-    calc(50% + 18.2vh) 0,
-    100% 0,
-    100% 100%,
-    calc(50% - 18.2vh) 100%
-  );
+  clip-path: polygon(calc(50% + 18.2vh) 0,
+      100% 0,
+      100% 100%,
+      calc(50% - 18.2vh) 100%);
 
-  padding-left: 50%;
+  padding-left: calc(50% + 18.2vh);
 
   z-index: 9;
 
-  background: linear-gradient(
-    290deg,
-    #0d0e18 0%,
-    #0a0c16 40%,
-    #080b1a 70%,
-    #0c1020 100%
-  );
+  background: linear-gradient(290deg,
+      #0d0e18 0%,
+      #0a0c16 40%,
+      #080b1a 70%,
+      #0c1020 100%);
 }
 
 .p5-preview-content {

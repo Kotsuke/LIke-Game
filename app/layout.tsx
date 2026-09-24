@@ -8,7 +8,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Persona 5 Style",
+  title: "Portfolio | Subandrio",
   description:
     "A bold, stylish portfolio website inspired by the Persona 5 UI. Showcasing projects, skills, and creative work with sharp angular designs and dynamic animations.",
 };
