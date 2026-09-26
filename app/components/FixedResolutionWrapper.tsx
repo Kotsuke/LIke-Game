@@ -8,10 +8,8 @@ export default function FixedResolutionWrapper({
   children: React.ReactNode;
 }) {
   const [scale, setScale] = useState(1);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const handleResize = () => {
       const targetW = 1920;
       const targetH = 1080;
@@ -27,22 +25,6 @@ export default function FixedResolutionWrapper({
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  if (!mounted) {
-    return (
-      <div
-        style={{
-          width: "100vw",
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#000",
-          overflow: "hidden",
-        }}
-      />
-    );
-  }
 
   return (
     <div
