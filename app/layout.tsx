@@ -1,11 +1,20 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import ZoomPreventer from "./components/ZoomPreventer";
+import FixedResolutionWrapper from "./components/FixedResolutionWrapper";
 
 const outfit = Outfit({
   subsets: ["latin"],
   weight: ["400", "600", "700", "800", "900"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export const metadata: Metadata = {
   title: "Portfolio | Subandrio",
@@ -16,7 +25,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={outfit.className}>
-      <body>{children}</body>
+      <body>
+        <ZoomPreventer />
+        <FixedResolutionWrapper>
+          {children}
+        </FixedResolutionWrapper>
+      </body>
     </html>
   );
 }

@@ -1,0 +1,1 @@
+const fs = require('fs'); let css = fs.readFileSync('app/globals.css', 'utf8'); css = css.replace(/(\d+(\.\d+)?)vh/g, (match, p1) => { const val = parseFloat(p1); return (val * 1080 / 100) + 'px'; }); css = css.replace(/(\d+(\.\d+)?)vw/g, (match, p1) => { const val = parseFloat(p1); return (val * 1920 / 100) + 'px'; }); fs.writeFileSync('app/globals.css', css);

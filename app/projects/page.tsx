@@ -49,17 +49,30 @@ const projects = [
 
 export default function ProjectsPage() {
   return (
-    <div className="p5-page-container">
+    <div className="p5-page-container p5-halftone p5-slash-bg">
       <Link href="/" className="p5-back-btn" id="btn-back-projects">
         <span>← Back</span>
       </Link>
 
-      <div className="p5-page-content p5-halftone p5-slash-bg">
-        <div className="p5-page-inner">
-          <div className="p5-page-header">
-            <SectionHeading subtitle="// My work" title="Projects" />
-          </div>
+      <div
+        className="p5-page-inner"
+        style={{ display: "flex", flexDirection: "column", height: "100vh", paddingBottom: 0 }}
+      >
+        <div className="p5-page-header" style={{ flexShrink: 0 }}>
+          <SectionHeading subtitle="// My work" title="Projects" />
+        </div>
 
+        <div
+          style={{
+            flex: 1,
+            overflowY: "auto",
+            paddingBottom: "80px",
+            paddingRight: "20px",
+            marginRight: "-20px",
+            scrollbarWidth: "thin",
+            scrollbarColor: "var(--p5-red) var(--p5-dark)",
+          }}
+        >
           <div className="p5-projects-grid">
             {projects.map((project) => (
               <ProjectCard key={project.number} {...project} />
