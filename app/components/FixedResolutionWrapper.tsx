@@ -8,9 +8,16 @@ export default function FixedResolutionWrapper({
   children: React.ReactNode;
 }) {
   const [scale, setScale] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsMobile(true);
+        return;
+      }
+      setIsMobile(false);
+      
       const targetW = 1920;
       const targetH = 1080;
 
@@ -25,6 +32,10 @@ export default function FixedResolutionWrapper({
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  if (isMobile) {
+    return <>{children}</>;
+  }
 
   return (
     <div
